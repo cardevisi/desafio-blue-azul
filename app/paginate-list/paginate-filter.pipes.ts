@@ -1,12 +1,16 @@
-import { Pipe } from '@angular/core';
+import {Pipe, PipeTransform} from "@angular/core";
 
 @Pipe({
-    name: 'filterByTitle'   
+    name: 'stringFilter'
 })
+export class StringFilterPipe implements PipeTransform {
 
-export class FilterByTitle {
-    
-    transform(vehicles, digitado) {
-        console.log(vehicles, digitado);
+    transform(value: string[], q: string) {
+        
+        if (!q || q === '') {
+            return value;
+        }
+        
+        return value.filter(item => (item.marca.toLowerCase().indexOf(q.toLowerCase()) != -1) || item.combustivel.toLowerCase().indexOf(q.toLowerCase()) != -1));
     }
 }

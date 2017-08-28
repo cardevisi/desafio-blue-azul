@@ -14,11 +14,13 @@ var ngx_pagination_1 = require("ngx-pagination"); // <-- import the module
 //Custom Modules
 var listing_module_1 = require("./listing/listing.module");
 var paginate_list_component_1 = require("./paginate-list/paginate-list.component");
+//import { PaginateModule } from './paginate-list/paginate-list.module';
 //Custom components
 var app_component_1 = require("./app.component");
 var user_profile_component_1 = require("./users/user-profile.component");
 var user_form_component_1 = require("./users/user-form.component");
 var register_component_1 = require("./register/register.component");
+var paginate_filter_pipes_1 = require("./paginate-list/paginate-filter.pipes");
 var app_routes_1 = require("./app.routes");
 var AppModule = (function () {
     function AppModule() {
@@ -30,6 +32,7 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 listing_module_1.ListingModule,
                 ngx_pagination_1.NgxPaginationModule,
+                //PaginateModule,
                 app_routes_1.routing
             ],
             declarations: [
@@ -37,7 +40,8 @@ var AppModule = (function () {
                 user_profile_component_1.UserProfileComponent,
                 user_form_component_1.UserFormComponent,
                 register_component_1.RegisterComponent,
-                paginate_list_component_1.PaginationComponent
+                paginate_list_component_1.PaginationComponent,
+                paginate_filter_pipes_1.StringFilterPipe
             ],
             bootstrap: [app_component_1.AppComponent] //bootstrap - modulo inicial
         })

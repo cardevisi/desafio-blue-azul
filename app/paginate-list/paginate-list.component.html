@@ -1,38 +1,61 @@
- <div class="row">
-    <div class="col-sm-2">
-        <a [routerLink]="['/register']" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Novo carro</a>
+ <div class="row mt-3">
+    <div class="col-md-12">
+        <div class="float-left">
+            <a [routerLink]="['/register']" class="btn btn-success" role="button" aria-pressed="true">Novo carro</a>
+        </div>
+        <div class="form-inline float-right">
+            <div class="input-group">
+                <input [(ngModel)]="queryString" type="text" class="form-control" placeholder="Pesquisar">
+                <span class="input-group-addon glyphicon glyphicon-search" aria-hidden="true"></span>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-4">
-        <input #searchWord type="text" class="form-control" placeholder="Filtrar veículos">
-    </div> 
+    <!-- <div class="col-md-12">
+        <button class="btn btn-success" (click)="pushItem()">Add Item</button>
+        <button class="btn btn-success" (click)="popItem()">Remove Item</button>
+    </div> -->
 </div> 
-<div class="row">
-    <table class="table table-striped" >
-        <thead>
-            <tr>
-                <th><input type="checkbox" value=""></th>
-                <th>Combustivel</th>
-                <th>Marca</th>
-                <th>Modelo</th>
-                <th>Placa</th>
-                <th>Valor</th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let item of collection | paginate : { itemsPerPage: 2, currentPage: p }">
-            <tr>
-                <th><input type="checkbox" value=""></th>
-                <td>{{ item.combustivel }}</td>
-                <td>{{ item.marca }}</td>
-                <td>{{ item.modelo }}</td>
-                <td>{{ item.placa }}</td>
-                <td>{{ item.valor }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <table class="table table-striped" >
+            <thead>
+                <tr>
+                    <th><input type="checkbox" value=""></th>
+                    <th>Combustível</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Placa</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of collection | stringFilter: queryString |  paginate : config">
+                <tr>
+                    <th scope="row"><input type="checkbox" value=""></th>
+                    <td>{{ item.combustivel }}</td>
+                    <td>{{ item.marca }}</td>
+                    <td>{{ item.modelo }}</td>
+                    <td>{{ item.placa }}</td>
+                    <td>{{ item.valor }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div class="row">
-    <div class="col-sm-12 col-centered">
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div class="row pagination">
+    <div class="col-sm-12">
+        <pagination-controls
+            [id]="config.id"
+            [maxSize]="maxSize"
+            [directionLinks]="directionLinks"
+            [autoHide]="autoHide"
+            [previousLabel]="labels.previousLabel"
+            [nextLabel]="labels.nextLabel"
+            [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+            [screenReaderPageLabel]="labels.screenReaderPageLabel"
+            [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+            (pageChange)="onPageChange($event)" 
+            (vehicleCreated)="onVehicleCreated($event)">
+        </pagination-controls>
     </div>
 </div>
 

@@ -1,1 +1,26 @@
-<h1>Cadastro de Veículos</h1>
+<div class="container">
+    <form #form="ngForm" (ngSubmit)="onSubmit($event)" *ngIf="active">
+         {{form.valid}}
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Marca</label>
+                <input type="text" class="form-control" name="marca" placeholder="marca" required 
+                [(ngModel)]="newVehicle.marca" #marca="ngModel">
+                <span class="help-block" *ngIf="marca.invalid && marca.touched">marca é obrigatório.</span>    
+            </div>
+            <div class="form-group">
+                <label>Modelo</label>
+                <input class="form-control"  autocomplete="off" name="modelo" placeholder="modelo" required 
+                [(ngModel)]="newVehicle.modelo" #modelo="ngModel">
+                <span class="help-block" *ngIf="modelo.invalid && modelo.touched">Modelo é obrigatório.</span>
+            </div>
+            <div class="form-group">
+                <label>Descrição</label>
+                <span class="help-block" *ngIf="marca.invalid && marca.touched">marca is required.</span>
+            </div>
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
+            <hr>
+        </div>
+    </form>
+</div>

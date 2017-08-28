@@ -9,13 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//our root app component
 var core_1 = require("@angular/core");
 var vehicle_1 = require("../shared/models/vehicle");
 var PaginationComponent = (function () {
     function PaginationComponent() {
+        this.queryString = '';
+        this.maxSize = 7;
+        this.directionLinks = true;
+        this.autoHide = false;
+        this.config = {
+            id: 'advanced',
+            itemsPerPage: 5,
+            currentPage: 1
+        };
+        this.labels = {
+            previousLabel: '<<',
+            nextLabel: '>>',
+            screenReaderPaginationLabel: 'Pagination',
+            screenReaderPageLabel: 'page',
+            screenReaderCurrentLabel: "You're on page"
+        };
+        this.popped = [];
         this.collection = [];
-        console.log(this.vehicles);
         this.collection = [
             {
                 "combustivel": "Flex",
@@ -36,7 +51,7 @@ var PaginationComponent = (function () {
             {
                 "combustivel": "Alcool",
                 "imagem": "http://carros.ig.com.br/fotos/2010/290_193/Fusca2_290_193.jpg",
-                "marca": "Volkswagen",
+                "marca": "Ford",
                 "modelo": "Fusca",
                 "placa": "PAI-4121",
                 "valor": "20000"
@@ -44,16 +59,29 @@ var PaginationComponent = (function () {
             {
                 "combustivel": "Alcool",
                 "imagem": "http://carros.ig.com.br/fotos/2010/290_193/Fusca2_290_193.jpg",
-                "marca": "Volkswagen",
+                "marca": "Subaru",
                 "modelo": "Fusca",
                 "placa": "PAI-4121",
                 "valor": "20000"
             }
-        ]; //this.vehicles;
-        /*for (let i = 1; i <= 100; i++) {
-          this.collection.push(`item ${i}`);
-        }*/
+        ];
     }
+    PaginationComponent.prototype.onPageChange = function (number) {
+        console.log('change to page', number);
+        this.config.currentPage = number;
+    };
+    PaginationComponent.prototype.pushItem = function () {
+        var item = this.popped.pop() || 'A newly-created meal!';
+        this.collection.push(item);
+    };
+    PaginationComponent.prototype.popItem = function () {
+        this.popped.push(this.collection.pop());
+    };
+    PaginationComponent.prototype.onVehicleCreated = function (event) {
+        console.log('event', event);
+        this.collection.push(event.vehicles);
+    };
+    ;
     __decorate([
         core_1.Input(),
         __metadata("design:type", vehicle_1.Vehicle)
@@ -63,6 +91,8 @@ var PaginationComponent = (function () {
             //moduleId: module.id,
             selector: 'pagination',
             templateUrl: './app/paginate-list/paginate-list.component.html',
+            styleUrls: ['./app/paginate-list/paginate-list.component.css'],
+            changeDetection: core_1.ChangeDetectionStrategy.Default
         }),
         __metadata("design:paramtypes", [])
     ], PaginationComponent);

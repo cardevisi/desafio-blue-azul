@@ -1,3 +1,7 @@
+body {
+    background: #F1F4F9;
+}
+
 @font-face {
     font-family: fontello;
     src: url(../font/fontello.eot?33092581);
@@ -249,4 +253,13 @@
 
 .icon-star:before {
     content: '\e838'
+}
+
+.nav-azul {
+    background: #2687E9;
+}
+
+.nav-azul .logo-azul {
+    font-size: 15px;
+    color: #fff;
 }

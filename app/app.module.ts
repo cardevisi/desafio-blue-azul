@@ -7,14 +7,14 @@ import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 //Custom Modules
 import { ListingModule } from './listing/listing.module';
 import { PaginationComponent } from './paginate-list/paginate-list.component';
-import { PaginateModule } from './paginate-list/paginate-list.module';
+//import { PaginateModule } from './paginate-list/paginate-list.module';
 
 //Custom components
 import { AppComponent } from './app.component';
 import { UserProfileComponent } from './users/user-profile.component';
 import { UserFormComponent } from './users/user-form.component';
 import { RegisterComponent } from './register/register.component';
-
+import { StringFilterPipe } from './paginate-list/paginate-filter.pipes';
 import { routing } from './app.routes'; 
 
 @NgModule({
@@ -23,6 +23,7 @@ import { routing } from './app.routes';
       FormsModule,
       ListingModule,
       NgxPaginationModule,
+      //PaginateModule,
       routing
   ],
   declarations: [ 
@@ -30,7 +31,8 @@ import { routing } from './app.routes';
     UserProfileComponent,
     UserFormComponent,
     RegisterComponent,
-    PaginationComponent
+    PaginationComponent,
+    StringFilterPipe
   ],
   bootstrap: [ AppComponent ] //bootstrap - modulo inicial
 })

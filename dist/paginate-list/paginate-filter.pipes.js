@@ -7,18 +7,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var FilterByTitle = (function () {
-    function FilterByTitle() {
+var StringFilterPipe = (function () {
+    function StringFilterPipe() {
     }
-    FilterByTitle.prototype.transform = function (vehicles, digitado) {
-        console.log(vehicles, digitado);
+    StringFilterPipe.prototype.transform = function (value, q) {
+        if (!q || q === '') {
+            return value;
+        }
+        return value.filter(function (item) { return (item.marca.toLowerCase().indexOf(q.toLowerCase()) != -1) || item.combustivel.toLowerCase().indexOf(q.toLowerCase()) != -1; });
+        ;
     };
-    FilterByTitle = __decorate([
+    StringFilterPipe = __decorate([
         core_1.Pipe({
-            name: 'filterByTitle'
+            name: 'stringFilter'
         })
-    ], FilterByTitle);
-    return FilterByTitle;
+    ], StringFilterPipe);
+    return StringFilterPipe;
 }());
-exports.FilterByTitle = FilterByTitle;
+exports.StringFilterPipe = StringFilterPipe;
 //# sourceMappingURL=paginate-filter.pipes.js.map
