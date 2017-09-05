@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var ListingComponent = (function () {
     function ListingComponent() {
-        this.message = 'Hello';
         this.vehicle = [
             {
                 "combustivel": "Flex",

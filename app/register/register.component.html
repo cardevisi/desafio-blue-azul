@@ -1,24 +1,40 @@
 <div class="container">
     <form #form="ngForm" (ngSubmit)="onSubmit($event)" *ngIf="active">
-         {{form.valid}}
+         <!-- {{form.valid}} -->
         <div class="col-md-6">
-            <div class="form-group">
+            <hr>
+            <div class="form-group" [ngClass]="{'has-success': !combustivel.invalid}">
+                <label>Combustível</label>
+                <input class="form-control form-control-danger" name="combustivel" placeholder="Preencha o tipo de combustível ..." 
+                    [(ngModel)]="newVehicle.combustivel" 
+                    #combustivel="ngModel" required>
+                <!-- <span class="form-control-feedback" *ngIf="combustivel.invalid && combustivel.touched">Combustível é obrigatório.</span> -->
+            </div>
+            <div class="form-group" [ngClass]="{'has-danger': marca.invalid, 'has-success': !marca.invalid}">
                 <label>Marca</label>
-                <input type="text" class="form-control" name="marca" placeholder="marca" required 
+                <input type="text" class="form-control" name="marca" placeholder="Preencha a marca ..." required 
                 [(ngModel)]="newVehicle.marca" #marca="ngModel">
-                <span class="help-block" *ngIf="marca.invalid && marca.touched">marca é obrigatório.</span>    
+                <span class="form-control-feedback mt-3" *ngIf="marca.invalid && marca.touched">Campo Marca obrigatório.</span>    
             </div>
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{'has-danger': modelo.invalid, 'has-success': !modelo.invalid}">
                 <label>Modelo</label>
-                <input class="form-control"  autocomplete="off" name="modelo" placeholder="modelo" required 
+                <input class="form-control form-control-danger"  name="modelo" placeholder="Preencha o modelo ..." required 
                 [(ngModel)]="newVehicle.modelo" #modelo="ngModel">
-                <span class="help-block" *ngIf="modelo.invalid && modelo.touched">Modelo é obrigatório.</span>
+                <span class="form-control-feedback mt-3" *ngIf="modelo.invalid && modelo.touched">Modelo é obrigatório.</span>
             </div>
-            <div class="form-group">
-                <label>Descrição</label>
-                <span class="help-block" *ngIf="marca.invalid && marca.touched">marca is required.</span>
+            <div class="form-group" [ngClass]="{'has-danger': placa.invalid, 'has-success': !placa.invalid}">
+                <label>Placa</label>
+                <input class="form-control"  name="placa" placeholder="Preencha a placa ..." required 
+                [(ngModel)]="newVehicle.placa" #placa="ngModel">
+                <span class="form-control-feedback mt-3" *ngIf="placa.invalid && placa.touched">Placa é obrigatório.</span>
             </div>
-            <button type="submit" class="btn btn-success">Salvar</button>
+            <div class="form-group" [ngClass]="{'has-success': !valor.invalid}">
+                <label>Valor</label>
+                <input class="form-control"  name="Valor" placeholder="Preencha o valor ..." required 
+                [(ngModel)]="newVehicle.valor" #valor="ngModel">
+                <!-- <span class="form-control-feedback" *ngIf="valor.invalid && valor.touched">Valor é obrigatório.</span> -->
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="form.form.invalid">Salvar</button>
             <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
             <hr>
         </div>

@@ -14,8 +14,7 @@ var StringFilterPipe = (function () {
         if (!q || q === '') {
             return value;
         }
-        return value.filter(function (item) { return (item.marca.toLowerCase().indexOf(q.toLowerCase()) != -1) || item.combustivel.toLowerCase().indexOf(q.toLowerCase()) != -1; });
-        ;
+        return value.filter(function (item) { return (item['marca'].toLowerCase().indexOf(q.toLowerCase()) != -1) || item['combustivel'].toLowerCase().indexOf(q.toLowerCase()) != -1; });
     };
     StringFilterPipe = __decorate([
         core_1.Pipe({

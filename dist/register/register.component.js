@@ -11,19 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var vehicle_1 = require("../shared/models/vehicle");
+var data_service_1 = require("../service/data.service");
 var RegisterComponent = (function () {
-    function RegisterComponent() {
+    function RegisterComponent(data) {
+        this.data = data;
         this.vehicleCreated = new core_1.EventEmitter();
         this.newVehicle = new vehicle_1.Vehicle();
         this.active = true;
     }
     RegisterComponent.prototype.onSubmit = function (event) {
         var _this = this;
-        console.log('event', this.newVehicle);
+        console.log('onSubmit', this.newVehicle);
         event.preventDefault();
+        this.data.changeMessage(this.newVehicle);
         this.vehicleCreated.emit({ vehicle: this.newVehicle });
-        this.newVehicle = new vehicle_1.Vehicle();
+        //this.newVehicle = new Vehicle();
         this.active = false;
+        //console.log('this.newVehicle', this.newVehicle);
         setTimeout(function () { return _this.active = true; }, 0);
     };
     __decorate([
@@ -33,8 +37,10 @@ var RegisterComponent = (function () {
     RegisterComponent = __decorate([
         core_1.Component({
             selector: 'register',
-            templateUrl: './app/register/register.component.html'
-        })
+            templateUrl: './app/register/register.component.html',
+            styleUrls: ['./app/register/register.component.css']
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
     ], RegisterComponent);
     return RegisterComponent;
 }());

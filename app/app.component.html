@@ -1,4 +1,4 @@
-<header class="text-center">
+<header>
     <nav class="navbar navbar-default nav-azul">
         <div class="navbar-header">
             <a class="navbar-brand" href="/"><i class="icon-contaazul logo-azul"></i></a>
@@ -7,39 +7,7 @@
 </header>
 
 <main>
-    
-            <!-- <pagination></pagination> -->
-            <!-- <vehicles></vehicles> -->
-            <!-- <register></register> -->
-            <router-outlet></router-outlet>
-    
-        
-        <!-- <div class="col-sm-4">
-            <div *ngIf="users">
-                <ul class="list-group users-list">
-                <li class="list-group-item"
-                    *ngFor="let user of users"
-                    (click)="selectUser(user)"
-                    [class.active]="user === activeUser">
-                    {{user.name}} {{user.password}}
-                </li>
-                </ul>
-            </div>
-
-             <user-form (userCreated)="onUserCreated($event)"></user-form>
-
-        </div> -->
-
-        <!-- <div class="col-sm-8">
-
-            <user-profile [user]="activeUser"></user-profile>
-
-            <div class="jumbotron" *ngIf="!activeUser">
-                <span class="glyphicon glyphicon-hand-left"></span>
-                <h2>Choose a User</h2>
-            </div>
-        </div>-->
-    
+    <router-outlet></router-outlet>
 </main>
 
 <footer class="text-center">

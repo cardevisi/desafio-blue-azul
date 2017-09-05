@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input , Output, EventEmitter} from '@angular/core';
 import { Vehicle } from '../shared/models/vehicle';
 import { PaginationInstance } from '../../node_modules/ngx-pagination';
+import { DataService } from "../service/data.service";
+
 
 @Component({
   //moduleId: module.id,
@@ -13,6 +15,7 @@ import { PaginationInstance } from '../../node_modules/ngx-pagination';
 export class PaginationComponent {
     @Input() vehicles : Vehicle;
 
+    private vehicleData: Vehicle;
     public queryString: string = '';
     public maxSize: number = 7;
     public directionLinks: boolean = true;
@@ -22,6 +25,7 @@ export class PaginationComponent {
         itemsPerPage: 5,
         currentPage: 1
     };
+
     public labels: any = {
         previousLabel: '<<',
         nextLabel: '>>',
@@ -33,42 +37,7 @@ export class PaginationComponent {
     private popped = [];
     private collection = [];
 
-    constructor() {
-        this.collection = [
-            {   
-                "combustivel" : "Flex",
-                "imagem" : null,
-                "marca" : "Volkswagem",
-                "modelo" : "Gol",
-                "placa" : "FFF-5498",
-                "valor" : "20000"
-            },
-            { 
-                "combustivel" : "Gasolina",
-                "imagem" : null,
-                "marca" : "Volkswagem",
-                "modelo" : "Fox",
-                "placa" : "FOX-4125",
-                "valor" : "20000"
-            },
-            { 
-                "combustivel" : "Alcool",
-                "imagem" : "http://carros.ig.com.br/fotos/2010/290_193/Fusca2_290_193.jpg",
-                "marca" : "Ford",
-                "modelo" : "Fusca",
-                "placa" : "PAI-4121",
-                "valor" : "20000"
-            },
-            { 
-                "combustivel" : "Alcool",
-                "imagem" : "http://carros.ig.com.br/fotos/2010/290_193/Fusca2_290_193.jpg",
-                "marca" : "Subaru",
-                "modelo" : "Fusca",
-                "placa" : "PAI-4121",
-                "valor" : "20000"
-            }
-        ];
-    }
+    constructor(private data: DataService) {}
 
     onPageChange(number: number) {
         console.log('change to page', number);
@@ -84,8 +53,14 @@ export class PaginationComponent {
         this.popped.push(this.collection.pop());
     }
 
-    onVehicleCreated(event) {
-        console.log('event', event);
-        this.collection.push(event.vehicles);
-    };
+    createdVehicle(vehicleData) {
+        this.collection = vehicleData;
+    }
+
+    ngOnInit() {
+        let that = this;
+        this.data.currentMessage.subscribe(function(vehicleData) {
+            that.createdVehicle(vehicleData);
+        });
+    }
 }

@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var user_1 = require("./shared/models/user");
+var data_service_1 = require("./service/data.service");
 var AppComponent = (function () {
     function AppComponent() {
         this.message = 'Hello';
@@ -30,6 +31,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app',
+            providers: [data_service_1.DataService],
             templateUrl: './app/app.component.html',
             styleUrls: ['./app/app.component.css']
         })

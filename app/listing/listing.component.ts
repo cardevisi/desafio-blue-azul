@@ -8,7 +8,6 @@ import { Vehicle } from '../shared/models/vehicle';
 })
 
 export class ListingComponent {
-    message: string = 'Hello';
     vehicle: Vehicle[] = [
         {   
             "combustivel" : "Flex",

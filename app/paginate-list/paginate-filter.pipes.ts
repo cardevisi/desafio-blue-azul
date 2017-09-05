@@ -11,6 +11,6 @@ export class StringFilterPipe implements PipeTransform {
             return value;
         }
         
-        return value.filter(item => (item.marca.toLowerCase().indexOf(q.toLowerCase()) != -1) || item.combustivel.toLowerCase().indexOf(q.toLowerCase()) != -1));
+        return value.filter(item => (item['marca'].toLowerCase().indexOf(q.toLowerCase()) != -1) || item['combustivel'].toLowerCase().indexOf(q.toLowerCase()) != -1);
     }
 }

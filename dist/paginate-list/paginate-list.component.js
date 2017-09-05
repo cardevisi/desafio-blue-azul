@@ -11,8 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var vehicle_1 = require("../shared/models/vehicle");
+var data_service_1 = require("../service/data.service");
 var PaginationComponent = (function () {
-    function PaginationComponent() {
+    function PaginationComponent(data) {
+        this.data = data;
         this.queryString = '';
         this.maxSize = 7;
         this.directionLinks = true;
@@ -31,40 +33,6 @@ var PaginationComponent = (function () {
         };
         this.popped = [];
         this.collection = [];
-        this.collection = [
-            {
-                "combustivel": "Flex",
-                "imagem": null,
-                "marca": "Volkswagem",
-                "modelo": "Gol",
-                "placa": "FFF-5498",
-                "valor": "20000"
-            },
-            {
-                "combustivel": "Gasolina",
-                "imagem": null,
-                "marca": "Volkswagem",
-                "modelo": "Fox",
-                "placa": "FOX-4125",
-                "valor": "20000"
-            },
-            {
-                "combustivel": "Alcool",
-                "imagem": "http://carros.ig.com.br/fotos/2010/290_193/Fusca2_290_193.jpg",
-                "marca": "Ford",
-                "modelo": "Fusca",
-                "placa": "PAI-4121",
-                "valor": "20000"
-            },
-            {
-                "combustivel": "Alcool",
-                "imagem": "http://carros.ig.com.br/fotos/2010/290_193/Fusca2_290_193.jpg",
-                "marca": "Subaru",
-                "modelo": "Fusca",
-                "placa": "PAI-4121",
-                "valor": "20000"
-            }
-        ];
     }
     PaginationComponent.prototype.onPageChange = function (number) {
         console.log('change to page', number);
@@ -77,11 +45,15 @@ var PaginationComponent = (function () {
     PaginationComponent.prototype.popItem = function () {
         this.popped.push(this.collection.pop());
     };
-    PaginationComponent.prototype.onVehicleCreated = function (event) {
-        console.log('event', event);
-        this.collection.push(event.vehicles);
+    PaginationComponent.prototype.createdVehicle = function (vehicleData) {
+        this.collection = vehicleData;
     };
-    ;
+    PaginationComponent.prototype.ngOnInit = function () {
+        var that = this;
+        this.data.currentMessage.subscribe(function (vehicleData) {
+            that.createdVehicle(vehicleData);
+        });
+    };
     __decorate([
         core_1.Input(),
         __metadata("design:type", vehicle_1.Vehicle)
@@ -94,7 +66,7 @@ var PaginationComponent = (function () {
             styleUrls: ['./app/paginate-list/paginate-list.component.css'],
             changeDetection: core_1.ChangeDetectionStrategy.Default
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [data_service_1.DataService])
     ], PaginationComponent);
     return PaginationComponent;
 }());
